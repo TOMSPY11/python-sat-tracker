@@ -1,4 +1,4 @@
-# i_dont_wanna_die
+# lissattracker
 
 A satellite tracker that runs in your terminal with **zero dependencies** — no
 skyfield, no sgp4, no numpy, no requests. Just the Python standard library.
