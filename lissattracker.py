@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""i_dont_wanna_die - a satellite tracker with no dependencies at all.
+"""lissattracker - a satellite tracker with no dependencies at all.
 
 Pulls TLEs from Celestrak, propagates them with a from-scratch SGP4
 (near-Earth model, Spacetrack Report #3 / Vallado), and draws what is over
@@ -7,10 +7,10 @@ your head right now as a curses sky-radar plus a live table.
 
 stdlib only: no skyfield, no sgp4, no numpy, no requests.
 
-    python3 i_dont_wanna_die.py --lat 55.75 --lon 37.62 --alt 150
-    python3 i_dont_wanna_die.py --group visual
-    python3 i_dont_wanna_die.py --once          # one-shot table, no curses
-    python3 i_dont_wanna_die.py --passes ISS    # next 48h of passes
+    python3 lissattracker.py --lat 55.75 --lon 37.62 --alt 150
+    python3 lissattracker.py --group visual
+    python3 lissattracker.py --once          # one-shot table, no curses
+    python3 lissattracker.py --passes ISS    # next 48h of passes
 """
 
 from __future__ import annotations
@@ -46,8 +46,8 @@ WGS84_A = 6378.137
 WGS84_F = 1.0 / 298.257223563
 WGS84_E2 = WGS84_F * (2.0 - WGS84_F)
 
-CACHE_DIR = os.path.expanduser("~/.cache/i_dont_wanna_die")
-CONFIG = os.path.expanduser("~/.config/i_dont_wanna_die.json")
+CACHE_DIR = os.path.expanduser("~/.cache/lissattracker")
+CONFIG = os.path.expanduser("~/.config/lissattracker.json")
 CACHE_TTL = 2 * 3600
 GP_URL = "https://celestrak.org/NORAD/elements/gp.php?GROUP={}&FORMAT=tle"
 
@@ -601,7 +601,7 @@ def fetch_tles(group="stations", force=False, quiet=False):
 
     url = GP_URL.format(group)
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "i_dont_wanna_die/1.0"})
+        req = urllib.request.Request(url, headers={"User-Agent": "lissattracker/1.0"})
         with urllib.request.urlopen(req, timeout=20) as resp:
             text = resp.read().decode("utf-8", "replace")
         if "1 " not in text:
@@ -802,7 +802,7 @@ def run_tui(stdscr, props, obs, source, group):
         stdscr.erase()
 
         nvis = sum(1 for f in fixes if f.visible)
-        head = (f" i_dont_wanna_die  {now:%Y-%m-%d %H:%M:%S}Z  "
+        head = (f" lissattracker  {now:%Y-%m-%d %H:%M:%S}Z  "
                 f"{obs.lat:+.3f},{obs.lon:+.3f} @{obs.alt*1000:.0f}m  "
                 f"{nvis}/{len(fixes)} up  [{source}]"
                 + ("  PAUSED" if paused else ""))
@@ -975,7 +975,7 @@ def print_passes(props, obs, now, query, hours, min_el):
 def main(argv=None):
     cfg = load_config()
     ap = argparse.ArgumentParser(
-        prog="i_dont_wanna_die",
+        prog="lissattracker",
         description="zero-dependency satellite tracker (SGP4 from scratch)")
     ap.add_argument("--lat", type=float, default=cfg.get("lat"),
                     help="observer latitude, degrees north")

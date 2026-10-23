@@ -6,11 +6,11 @@ skyfield, no sgp4, no numpy, no requests. Just the Python standard library.
 SGP4 is implemented from scratch, so the only thing you need is a Python 3.
 
 ```
-$ python3 i_dont_wanna_die.py --lat 13.82 --lon 100.51 --alt 10
+$ python3 lissattracker.py --lat 13.82 --lon 100.51 --alt 10
 ```
 
 ```
- i_dont_wanna_die  2026-10-23 13:25:57Z  +51.478,-0.002 @45m  2/17 up  [celestrak (stations)]
+ lissattracker  2026-10-23 13:25:57Z  +51.478,-0.002 @45m  2/17 up  [celestrak (stations)]
 
    SATELLITE            ELEV    AZIM         RANGE   RATE     LAT      LON     ALT
 >1 ISS (ZARYA)          42.6°  118.3° ESE     812km  -5.21   46.68    14.02   421km │
@@ -27,18 +27,18 @@ $ python3 i_dont_wanna_die.py --lat 13.82 --lon 100.51 --alt 10
 
 ```sh
 # live TUI (your location is remembered after the first run)
-python3 i_dont_wanna_die.py --lat 13.82 --lon 100.51 --alt 10
+python3 lissattracker.py --lat 13.82 --lon 100.51 --alt 10
 
 # one-shot table of everything currently above the horizon
-python3 i_dont_wanna_die.py --once
-python3 i_dont_wanna_die.py --once --all      # include everything below, too
+python3 lissattracker.py --once
+python3 lissattracker.py --once --all      # include everything below, too
 
 # when is it next overhead?
-python3 i_dont_wanna_die.py --passes ISS --hours 48 --min-el 10
+python3 lissattracker.py --passes ISS --hours 48 --min-el 10
 
 # other Celestrak groups, or your own elements
-python3 i_dont_wanna_die.py --group visual     # also: active, starlink, noaa, gps-ops, ...
-python3 i_dont_wanna_die.py --tle my_sats.tle
+python3 lissattracker.py --group visual     # also: active, starlink, noaa, gps-ops, ...
+python3 lissattracker.py --tle my_sats.tle
 ```
 
 ### Keys
