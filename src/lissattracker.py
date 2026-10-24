@@ -26,6 +26,8 @@ import time
 import urllib.error
 import urllib.request
 
+__version__ = "1.0.0"
+
 TAU = 2.0 * math.pi
 DEG = 180.0 / math.pi
 RAD = math.pi / 180.0

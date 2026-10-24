@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lissattracker"
+dynamic = ["version"]
+description = "Zero-dependency satellite tracker for the terminal, with SGP4 implemented from scratch"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [{ name = "TOMSPY11" }]
+keywords = ["satellite", "sgp4", "tle", "orbit", "tracking", "iss", "celestrak", "astronomy"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console :: Curses",
+    "Intended Audience :: Science/Research",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS :: MacOS X",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Typing :: Stubs Only",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/TOMSPY11/python-sat-tracker"
+Source = "https://github.com/TOMSPY11/python-sat-tracker"
+Issues = "https://github.com/TOMSPY11/python-sat-tracker/issues"
+
+[project.scripts]
+lissattracker = "lissattracker:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+py-modules = ["lissattracker"]
+
+[tool.setuptools.dynamic]
+version = { attr = "lissattracker.__version__" }

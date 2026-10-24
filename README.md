@@ -5,9 +5,12 @@ skyfield, no sgp4, no numpy, no requests. Just the Python standard library.
 
 SGP4 is implemented from scratch, so the only thing you need is a Python 3.
 
+```sh
+pip install git+https://github.com/TOMSPY11/python-sat-tracker
+lissattracker --lat 13.82 --lon 100.51 --alt 10
 ```
-$ python3 lissattracker.py --lat 13.82 --lon 100.51 --alt 10
-```
+
+> Not on PyPI yet. Once it is published, `pip install lissattracker` will work.
 
 ```
  lissattracker  2026-10-23 13:25:57Z  +51.478,-0.002 @45m  2/17 up  [celestrak (stations)]
@@ -27,18 +30,24 @@ $ python3 lissattracker.py --lat 13.82 --lon 100.51 --alt 10
 
 ```sh
 # live TUI (your location is remembered after the first run)
-python3 lissattracker.py --lat 13.82 --lon 100.51 --alt 10
+lissattracker --lat 13.82 --lon 100.51 --alt 10
 
 # one-shot table of everything currently above the horizon
-python3 lissattracker.py --once
-python3 lissattracker.py --once --all      # include everything below, too
+lissattracker --once
+lissattracker --once --all      # include everything below, too
 
 # when is it next overhead?
-python3 lissattracker.py --passes ISS --hours 48 --min-el 10
+lissattracker --passes ISS --hours 48 --min-el 10
 
 # other Celestrak groups, or your own elements
-python3 lissattracker.py --group visual     # also: active, starlink, noaa, gps-ops, ...
-python3 lissattracker.py --tle my_sats.tle
+lissattracker --group visual     # also: active, starlink, noaa, gps-ops, ...
+lissattracker --tle my_sats.tle
+```
+
+Without installing, the module runs straight from a checkout:
+
+```sh
+python3 src/lissattracker.py --once
 ```
 
 ### Keys
@@ -93,6 +102,15 @@ silently given a wrong position.
 
 Polar motion is ignored in the TEME→ECEF rotation, which is worth a few metres.
 Atmospheric refraction near the horizon is not modelled.
+
+## Development
+
+```sh
+git clone https://github.com/TOMSPY11/python-sat-tracker
+cd python-sat-tracker
+PYTHONPATH=src python3 -m unittest discover -s tests -v    # 21 tests, no deps
+python3 -m build                                           # sdist + wheel
+```
 
 ## Licence
 
